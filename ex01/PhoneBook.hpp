@@ -2,7 +2,7 @@
 
 class   PhoneBook
 {
-    public:
+    private:
     char*   contacts[8];
     
 }
