@@ -1,10 +1,11 @@
 // #include "Contact.hpp"
 // #include "PhoneBook.hpp"
 #include <iostream>
-#include <string>
+#include <iomanip>
 #include <ios>
-#include <limits>
+#include <string>
 #include <string_view>
+#include <limits>
 
 class   Contact
 {
@@ -41,6 +42,18 @@ class   Contact
         }
 };
 
+std::string ft_substr(std::string str)
+{
+    if (str.length() > 9)
+    {
+        str = str.substr(0, 9);
+        str = str + ".";
+    }
+    else
+        str = str.substr(0, 10);
+    return (str);
+}
+
 class   PhoneBook
 {
     private:
@@ -67,15 +80,31 @@ class   PhoneBook
             std::cout << "PhoneBook is empty!\n" << std::endl;
             return ;
         }
-        std::cout << "Contacts: " << std::endl;
+        std::cout << "\nContacts:\n" << std::endl;
+
+        // printing the headers:
+        std::cout << std::setw(10) << "index"
+            << " | " << std::setw(10) << "first name"
+            << " | " << std::setw(10) << "last name"
+            << " | " << std::setw(10) << "nickname"
+            << std::endl;
+        
+        // printing a separator line:
+        std::cout << std::setw(10) << std::setfill('-') << ""
+            << " | " << std::setw(10) << std::setfill('-') << ""
+            << " | " << std::setw(10) << std::setfill('-') << ""
+            << " | " << std::setw(10) << std::setfill('-') << ""
+            << std::setfill(' ') << std::endl;
+
+        // printing contacts:
         for (int i = 0; i < 8; i++){
             if (contacts[i].empty != 1)
             {
-                std::cout << "index: " << i << std::endl;
-                std::cout << (contacts[i].first_name) << std::endl;
-                std::cout << (contacts[i].last_name) << std::endl;
-                std::cout << (contacts[i].nickname) << std::endl;
-                std::cout << std::endl;
+                std::cout << std::setw(10) << i
+                    << " | " << std::setw(10) << ft_substr(contacts[i].first_name)
+                    << " | " << std::setw(10) << ft_substr(contacts[i].last_name)
+                    << " | " << std::setw(10) << ft_substr(contacts[i].nickname)
+                    << std::endl;
             }
         }
     }
