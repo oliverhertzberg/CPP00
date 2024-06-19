@@ -108,6 +108,17 @@ class   PhoneBook
             }
         }
     }
+    void    display_contact(int index){
+        if (index < 0 || index > 7)
+            std::cout << "Index has to be between 0 and 7!" << std::endl;
+        if (contacts[index].empty == -1)
+            std::cout << "Contact doesn't exist!" << std::endl;
+        std::cout << contacts[index].first_name << std::endl
+            << contacts[index].last_name << std::endl
+            << contacts[index].nickname << std::endl
+            << contacts[index].phone_number << std::endl
+            << contacts[index].darkest_secret << std::endl;
+    }
 
 };
 
@@ -149,7 +160,18 @@ void    add_contact(PhoneBook* phonebook)
 
 void    search_contact(PhoneBook* phonebook)
 {
+    std::string input;
+
     phonebook->display_contacts();
+    std::cout << "Enter id of contact to display: ";
+    std::getline(std::cin, input);
+    while (input.length() > 1)
+    {
+        std::cout << "Our amazing PhoneBook™ can store up to 8 contacts" << std::endl;
+        std::cout << "Please enter an index between 0 and 7" << std::endl;
+        std::getline(std::cin, input);
+    }
+    phonebook->display_contact(stoi(input));
 }
 
 int main(int argc, char **argv)
@@ -169,7 +191,7 @@ int main(int argc, char **argv)
         else if (!std::strcmp(input.c_str(), "EXIT"))
             exit(0);
         else
-            std::cout << "Invalid input:\n";
+            std::cout << "Invalid input!\n";
         print_instructions();
     }
 }
