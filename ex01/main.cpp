@@ -95,32 +95,24 @@ void    add_contact(PhoneBook* phonebook)
     std::string input;
 
     std::cout << "Enter first name: ";
-    std::cin >> input;
+    std::getline(std::cin, input);
     contact.add_first_name(input);
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     std::cout << "Enter last name: ";
-    std::cin >> input;
+    std::getline(std::cin, input);
     contact.add_last_name(input);
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     std::cout << "Enter nickname: ";
-    std::cin >> input;
+    std::getline(std::cin, input);
     contact.add_nickname(input);
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     std::cout << "Enter phone number: ";
-    std::cin >> input;
+    std::getline(std::cin, input);
     contact.add_phone_number(input);
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     std::cout << "Enter darkest secret: ";
-    std::cin >> input;
+    std::getline(std::cin, input);
     contact.add_darkest_secret(input);
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-    std::cout << contact.first_name << std::endl;
-    std::cout << contact.darkest_secret << std::endl;
 
     phonebook->add_contact(contact);
     std::cout << "Contact created!\n" << std::endl;
@@ -140,7 +132,7 @@ int main(int argc, char **argv)
     print_instructions();
     while (1) 
     {
-        std::cin >> input;
+        std::getline(std::cin, input);
         if (!std::strcmp(input.c_str(), "ADD"))
             add_contact(&phonebook);
         else if (!std::strcmp(input.c_str(), "SEARCH"))
@@ -150,6 +142,5 @@ int main(int argc, char **argv)
         else
             std::cout << "Invalid input:\n";
         print_instructions();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 }
