@@ -5,48 +5,129 @@
 #include <ios>
 #include <limits>
 
+class   Contact
+{
+    public:
+        int empty;
+        std::string first_name;
+        std::string last_name;
+        std::string nickname;
+        std::string phone_number;
+        std::string darkest_secret;
+
+        Contact(){
+            this->empty = 0;
+            this->first_name = "";
+            this->last_name = "";
+            this->nickname = "";
+            this->phone_number = "";
+            this->darkest_secret = "";
+        }
+        void    add_first_name(const std::string& first_name){
+            this->first_name = first_name;
+        }
+        void    add_last_name(const std::string& last_name){
+            this->last_name = last_name;
+        }
+        void    add_nickname(const std::string& nickname){
+            this->nickname = nickname;
+        }
+        void    add_phone_number(const std::string& phone_number){
+            this->phone_number = phone_number;
+        }
+        void    add_darkest_secret(const std::string& darkest_secret){
+            this->darkest_secret = darkest_secret;
+        }
+};
+
 class   PhoneBook
 {
     private:
-        Contact*  contacts[8];
+        Contact contacts[8];
+
     public:
-        int num_of_contacts = 0;
-    void    add_contact(Contact* contact)
-    {
+        int num_of_contacts;
+    
+    PhoneBook(){
+        num_of_contacts = 0;
+        for (int i = 0; i < 8; i++){
+        contacts[i].empty = 1;
+        }
+    }
+
+    void    add_contact(Contact contact){
         if (num_of_contacts + 1 > 8)
             num_of_contacts = 0;
         this->contacts[num_of_contacts] = contact;
         num_of_contacts++;
     }
-    
-};
+    void    display_contacts(){
+        if (contacts[0].empty == 1){
+            std::cout << "PhoneBook is empty!\n" << std::endl;
+            return ;
+        }
+        std::cout << "Contacts: " << std::endl;
+        for (int i = 0; i < 8; i++){
+            if (contacts[i].empty != 1)
+            {
+                std::cout << "index: " << i << std::endl;
+                std::cout << (contacts[i].first_name) << std::endl;
+                std::cout << (contacts[i].last_name) << std::endl;
+                std::cout << (contacts[i].nickname) << std::endl;
+                std::cout << std::endl;
+            }
+        }
+    }
 
-class   Contact
-{
-    public:
-        char    *first_name;
-        char    *last_name;
-        char    *nickname;
-        char    *phone_number;
-        char    *darkest_secret;
-    
 };
 
 void    print_instructions()
 {
-    std::cout << "Enter 'ADD' to add a new contact\n";
-    std::cout << "Enter 'SEARCH' to search for a contact\n";
-    std::cout << "Enter 'EXIT' to exit the program\n";
+    std::cout << "Enter 'ADD' to add a new contact" << std::endl;
+    std::cout << "Enter 'SEARCH' to search for a contact" << std::endl;
+    std::cout << "Enter 'EXIT' to exit the program" << std::endl;
 }
 
 void    add_contact(PhoneBook* phonebook)
 {
-    
+    class Contact contact;
+    std::string input;
+
+    std::cout << "Enter first name: ";
+    std::cin >> input;
+    contact.add_first_name(input);
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::cout << "Enter last name: ";
+    std::cin >> input;
+    contact.add_last_name(input);
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::cout << "Enter nickname: ";
+    std::cin >> input;
+    contact.add_nickname(input);
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::cout << "Enter phone number: ";
+    std::cin >> input;
+    contact.add_phone_number(input);
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::cout << "Enter darkest secret: ";
+    std::cin >> input;
+    contact.add_darkest_secret(input);
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::cout << contact.first_name << std::endl;
+    std::cout << contact.darkest_secret << std::endl;
+
+    phonebook->add_contact(contact);
+    std::cout << "Contact created!\n" << std::endl;
 }
 
 void    search_contact(PhoneBook* phonebook)
 {
-
+    phonebook->display_contacts();
 }
 
 int main(int argc, char **argv)
@@ -56,7 +137,7 @@ int main(int argc, char **argv)
 
     std::cout << "The Awesome PhoneBook Program\n";
     print_instructions();
-    while (1)
+    while (1) 
     {
         std::cin >> input;
         if (!std::strcmp(input.c_str(), "ADD"))
@@ -66,10 +147,8 @@ int main(int argc, char **argv)
         else if (!std::strcmp(input.c_str(), "EXIT"))
             exit(0);
         else
-        {
             std::cout << "Invalid input:\n";
-            print_instructions();
-        }
+        print_instructions();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 }
