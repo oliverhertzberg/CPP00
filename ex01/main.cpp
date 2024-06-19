@@ -4,6 +4,7 @@
 #include <string>
 #include <ios>
 #include <limits>
+#include <string_view>
 
 class   Contact
 {
