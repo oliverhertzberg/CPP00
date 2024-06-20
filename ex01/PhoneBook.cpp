@@ -6,14 +6,14 @@
 /*   By: ohertzbe <ohertzbe@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:22:57 by ohertzbe          #+#    #+#             */
-/*   Updated: 2024/06/20 18:15:52 by ohertzbe         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:39:03 by ohertzbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
 // constructor
-PhoneBook::PhoneBook() {
+PhoneBook::PhoneBook(){
     num_of_contacts = 0;
     for (int i = 0; i < 8; i++){
     contacts[i].empty = 1;
@@ -32,7 +32,7 @@ void    PhoneBook::add_contact(Contact contact){
     num_of_contacts++;
 }
 
-int    PhoneBook::display_contacts() {
+int    PhoneBook::display_contacts(){
     if (contacts[0].empty == 1){
         std::cout << "PhoneBook is empty!\n" << std::endl;
         return 0;

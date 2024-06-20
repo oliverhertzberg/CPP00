@@ -6,7 +6,7 @@
 /*   By: ohertzbe <ohertzbe@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:16:27 by ohertzbe          #+#    #+#             */
-/*   Updated: 2024/06/20 18:18:31 by ohertzbe         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:39:49 by ohertzbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 
 std::string ft_substr(std::string str);
 
-class   Contact
-{
+class   Contact{
     public:
         int         empty;
         std::string first_name;

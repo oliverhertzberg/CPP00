@@ -6,15 +6,14 @@
 /*   By: ohertzbe <ohertzbe@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 13:22:36 by ohertzbe          #+#    #+#             */
-/*   Updated: 2024/06/20 15:37:19 by ohertzbe         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:39:45 by ohertzbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 
-std::string ft_substr(std::string str)
-{
+std::string ft_substr(std::string str){
     if (str.length() > 9)
     {
         str = str.substr(0, 9);
@@ -25,8 +24,7 @@ std::string ft_substr(std::string str)
     return (str);
 }
 
-void    print_instructions()
-{
+void    print_instructions(){
     std::cout << std::setw(40) << std::setfill('-') << ""
               << std::setfill(' ') << std::endl
               << "| " << "Enter 'ADD' to add a new contact" << "       |" << std::endl
@@ -36,8 +34,7 @@ void    print_instructions()
               << std::setfill(' ') << "\n" << std::endl;
 }
 
-void    add_contact(PhoneBook* phonebook)
-{
+void    add_contact(PhoneBook* phonebook){
     class Contact contact;
     std::string input;
 
@@ -65,8 +62,7 @@ void    add_contact(PhoneBook* phonebook)
     std::cout << "\nContact created!\n\n" << std::endl;
 }
 
-void    search_contact(PhoneBook* phonebook)
-{
+void    search_contact(PhoneBook* phonebook){
     std::string input;
 
     if (!phonebook->display_contacts())
@@ -85,8 +81,7 @@ void    search_contact(PhoneBook* phonebook)
         search_contact(phonebook);
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv){
     PhoneBook phonebook;
     std::string  input;
 
