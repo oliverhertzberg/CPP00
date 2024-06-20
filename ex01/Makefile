@@ -1,14 +1,25 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ohertzbe <ohertzbe@student.hive.fi>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/06/20 15:40:32 by ohertzbe          #+#    #+#              #
+#    Updated: 2024/06/20 18:13:55 by ohertzbe         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC := c++
 CFLAGS := -Wall -Wextra -Werror
-NAME := megaphone
-
-SRC := megaphone.cpp
+NAME := "The Awesome PhoneBook Program"
+SRC := main.cpp Contact.cpp PhoneBook.cpp
 OBJ := $(patsubst %.cpp, %.o, $(SRC))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
 clean:
 	rm -rf $(OBJ)
