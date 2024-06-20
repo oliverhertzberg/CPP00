@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ohertzbe <ohertzbe@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/20 13:22:36 by ohertzbe          #+#    #+#             */
+/*   Updated: 2024/06/20 14:54:01 by ohertzbe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 // #include "Contact.hpp"
 // #include "PhoneBook.hpp"
 #include <iostream>
@@ -62,7 +74,7 @@ class   PhoneBook
     public:
         int num_of_contacts;
     
-    PhoneBook(){
+    PhoneBook() {
         num_of_contacts = 0;
         for (int i = 0; i < 8; i++){
         contacts[i].empty = 1;
@@ -75,58 +87,71 @@ class   PhoneBook
         this->contacts[num_of_contacts] = contact;
         num_of_contacts++;
     }
-    void    display_contacts(){
+    int    display_contacts() {
         if (contacts[0].empty == 1){
             std::cout << "PhoneBook is empty!\n" << std::endl;
-            return ;
+            return 0;
         }
         std::cout << "\nContacts:\n" << std::endl;
 
         // printing the headers:
         std::cout << std::setw(10) << "index"
-            << " | " << std::setw(10) << "first name"
-            << " | " << std::setw(10) << "last name"
-            << " | " << std::setw(10) << "nickname"
-            << std::endl;
+                  << " | " << std::setw(10) << "first name"
+                  << " | " << std::setw(10) << "last name"
+                  << " | " << std::setw(10) << "nickname"
+                  << std::endl;
         
         // printing a separator line:
         std::cout << std::setw(10) << std::setfill('-') << ""
-            << " | " << std::setw(10) << std::setfill('-') << ""
-            << " | " << std::setw(10) << std::setfill('-') << ""
-            << " | " << std::setw(10) << std::setfill('-') << ""
-            << std::setfill(' ') << std::endl;
+                  << " | " << std::setw(10) << std::setfill('-') << ""
+                  << " | " << std::setw(10) << std::setfill('-') << ""
+                  << " | " << std::setw(10) << std::setfill('-') << ""
+                  << std::setfill(' ') << std::endl;
 
         // printing contacts:
         for (int i = 0; i < 8; i++){
             if (contacts[i].empty != 1)
             {
                 std::cout << std::setw(10) << i
-                    << " | " << std::setw(10) << ft_substr(contacts[i].first_name)
-                    << " | " << std::setw(10) << ft_substr(contacts[i].last_name)
-                    << " | " << std::setw(10) << ft_substr(contacts[i].nickname)
-                    << std::endl;
+                          << " | " << std::setw(10) << ft_substr(contacts[i].first_name)
+                          << " | " << std::setw(10) << ft_substr(contacts[i].last_name)
+                          << " | " << std::setw(10) << ft_substr(contacts[i].nickname)
+                          << "\n"
+                          << std::endl;
             }
         }
+        return (1);
     }
-    void    display_contact(int index){
-        if (index < 0 || index > 7)
-            std::cout << "Index has to be between 0 and 7!" << std::endl;
-        if (contacts[index].empty == -1)
+    int    display_contact(int index){
+        if (contacts[index].empty == 1){
             std::cout << "Contact doesn't exist!" << std::endl;
-        std::cout << contacts[index].first_name << std::endl
-            << contacts[index].last_name << std::endl
-            << contacts[index].nickname << std::endl
-            << contacts[index].phone_number << std::endl
-            << contacts[index].darkest_secret << std::endl;
+            return (0);
+        }
+        else{
+            std::cout << "--------------------------------------------------------" << std::endl
+                      << "First Name: " << contacts[index].first_name << std::endl
+                      << "Last Name: " << contacts[index].last_name << std::endl
+                      << "Nickname: " << contacts[index].nickname << std::endl
+                      << "Phone Number: " << contacts[index].phone_number << std::endl
+                      << "Darkest Secret: " << contacts[index].darkest_secret << std::endl
+                      << "--------------------------------------------------------" << std::endl
+                      << std::setfill('-') << ""
+                      << std::setfill(' ') << std::endl;
+        }
+        return (1);
     }
 
 };
 
 void    print_instructions()
 {
-    std::cout << "Enter 'ADD' to add a new contact" << std::endl;
-    std::cout << "Enter 'SEARCH' to search for a contact" << std::endl;
-    std::cout << "Enter 'EXIT' to exit the program" << std::endl;
+    std::cout << std::setw(40) << std::setfill('-') << ""
+              << std::setfill(' ') << std::endl
+              << "| " << "Enter 'ADD' to add a new contact" << "       |" << std::endl
+              << "| " << "Enter 'SEARCH' to search for a contact" << " |" << std::endl
+              << "| " << "Enter 'EXIT' to exit the program" << "       |" << std::endl
+              << std::setw(40) << std::setfill('-') << ""
+              << std::setfill(' ') << "\n" << std::endl;
 }
 
 void    add_contact(PhoneBook* phonebook)
@@ -134,7 +159,7 @@ void    add_contact(PhoneBook* phonebook)
     class Contact contact;
     std::string input;
 
-    std::cout << "Enter first name: ";
+    std::cout << "\nEnter first name: ";
     std::getline(std::cin, input);
     contact.add_first_name(input);
 
@@ -155,23 +180,27 @@ void    add_contact(PhoneBook* phonebook)
     contact.add_darkest_secret(input);
 
     phonebook->add_contact(contact);
-    std::cout << "Contact created!\n" << std::endl;
+    std::cout << "\nContact created!\n\n" << std::endl;
 }
 
 void    search_contact(PhoneBook* phonebook)
 {
     std::string input;
 
-    phonebook->display_contacts();
+    if (!phonebook->display_contacts())
+        return ;
     std::cout << "Enter id of contact to display: ";
     std::getline(std::cin, input);
-    while (input.length() > 1)
+    std::cout << std::endl;
+    while (input.length() > 1 || stoi(input) > 7 || stoi(input) < 0)
     {
         std::cout << "Our amazing PhoneBook™ can store up to 8 contacts" << std::endl;
-        std::cout << "Please enter an index between 0 and 7" << std::endl;
+        std::cout << "Please enter an index between 0 and 7" << "\n" << std::endl;
+        std::cout << "Enter id of contact to display: ";
         std::getline(std::cin, input);
     }
-    phonebook->display_contact(stoi(input));
+    if (!phonebook->display_contact(stoi(input)))
+        search_contact(phonebook);
 }
 
 int main(int argc, char **argv)
@@ -179,16 +208,18 @@ int main(int argc, char **argv)
     PhoneBook phonebook;
     std::string  input;
 
-    std::cout << "The Awesome PhoneBook Program\n";
+    std::cout << "---------------------------------" << std::endl 
+              << "| The Awesome PhoneBook Program |\n"
+              << "---------------------------------" << std::endl;
     print_instructions();
     while (1) 
     {
         std::getline(std::cin, input);
-        if (!std::strcmp(input.c_str(), "ADD"))
+        if (!input.compare("ADD"))
             add_contact(&phonebook);
-        else if (!std::strcmp(input.c_str(), "SEARCH"))
+        else if (!input.compare("SEARCH"))
             search_contact(&phonebook);
-        else if (!std::strcmp(input.c_str(), "EXIT"))
+        else if (!input.compare("EXIT"))
             exit(0);
         else
             std::cout << "Invalid input!\n";
