@@ -12,7 +12,7 @@
 
 CC := c++
 CFLAGS := -Wall -Wextra -Werror
-NAME := "The Job Of Your Dreams"
+NAME := TheJobOfYourDreams
 SRC := Account.cpp tests.cpp
 OBJ := $(patsubst %.cpp, %.o, $(SRC))
 
