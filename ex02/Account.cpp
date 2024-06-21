@@ -6,7 +6,7 @@
 /*   By: ohertzbe <ohertzbe@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 19:13:22 by ohertzbe          #+#    #+#             */
-/*   Updated: 2024/06/21 00:23:17 by ohertzbe         ###   ########.fr       */
+/*   Updated: 2024/06/21 13:07:06 by ohertzbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ int Account::_totalNbWithdrawals = 0;
 Account::Account( int initial_deposit ){
     _displayTimestamp();
     _nbAccounts++;
-    _totalNbDeposits++;
     _totalAmount += initial_deposit;
     this->_accountIndex = _nbAccounts - 1;
     this->_amount = initial_deposit;
-    this->_nbDeposits = 1;
+    this->_nbDeposits = 0;
     this->_nbWithdrawals = 0;
     std::cout << "index:" << this->_accountIndex
               << ";amount:" << this->_amount
@@ -94,6 +93,7 @@ void    Account::_displayTimestamp( void ){
 // non-static methods
 void    Account::makeDeposit( int deposit ){
     _displayTimestamp();
+    _totalAmount += deposit;
     this->_amount += deposit;
     this->_nbDeposits += 1;
     _totalNbDeposits++;
@@ -101,7 +101,7 @@ void    Account::makeDeposit( int deposit ){
               << ";p_amount:" << this->_amount - deposit
               << ";deposit:" << deposit
               << ";amount:" << this->_amount
-              << "nb_deposits:" << this->_nbDeposits
+              << ";nb_deposits:" << this->_nbDeposits
               << std::endl;
 }
 
@@ -114,12 +114,15 @@ bool    Account::makeWithdrawal( int withdrawal ){
                 std::cout << "refused" << std::endl;
                 return (false);
               }
+    this->_amount -= withdrawal;
     std::cout << withdrawal
               << ";amount:" << this->_amount
-              << ";nb_withdrawals" << this->_nbWithdrawals + 1
+              << ";nb_withdrawals:" << this->_nbWithdrawals + 1
               << std::endl;
     this->_nbWithdrawals++;
+    _totalAmount -= withdrawal;
     _totalNbWithdrawals++;
+    return (true);
 }
 
 int     Account::checkAmount( void ) const{
