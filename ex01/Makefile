@@ -12,7 +12,7 @@
 
 CC := c++
 CFLAGS := -Wall -Wextra -Werror
-NAME := "The Awesome PhoneBook Program"
+NAME := TheAwesomePhoneBookProgram
 SRC := main.cpp Contact.cpp PhoneBook.cpp
 OBJ := $(patsubst %.cpp, %.o, $(SRC))
 
