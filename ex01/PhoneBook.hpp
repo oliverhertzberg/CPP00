@@ -6,12 +6,12 @@
 /*   By: ohertzbe <ohertzbe@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:17:29 by ohertzbe          #+#    #+#             */
-/*   Updated: 2024/06/20 18:39:13 by ohertzbe         ###   ########.fr       */
+/*   Updated: 2024/06/21 17:53:33 by ohertzbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK
-#define PHONEBOOK
+#ifndef PHONEBOOK_HPP
+#define PHONEBOOK_HPP
 
 #include "Contact.hpp"
 
